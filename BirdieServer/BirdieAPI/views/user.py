@@ -15,12 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class Users(ViewSet):
     def list(self, request):
-        """Handle GET requests to customers resource
-        
-        Returns:
-            Response -- JSON serialized list of customers
-        """
-
+       
         users = User.objects.all()
 
         serializer = UserSerializer(users, many=True, context={'request': request})
