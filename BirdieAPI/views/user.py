@@ -13,6 +13,21 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     )
     fields = ('id', 'first_name', 'last_name', 'url')
 
+class User(ViewSet):
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for single user
+
+        Returns:
+            Response -- JSON serialized user instance
+        """
+        try:
+            user = User.objects.get(pk=pk)
+            serializer = UserSerializer(user, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
+
 class Users(ViewSet):
     def list(self, request):
        

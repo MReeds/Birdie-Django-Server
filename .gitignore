@@ -19,7 +19,8 @@ local_settings.py
 .env
 
 # virtualenv
-BirdieEnv/
+BirdieEnv
+venv/
 .vscode
 
 .DS_Store

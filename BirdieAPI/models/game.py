@@ -8,7 +8,7 @@ class Game(models.Model):
     user =  models.ForeignKey(User, on_delete=models.CASCADE)
     park = models.ForeignKey(Park, on_delete=models.DO_NOTHING)
     bag = models.ForeignKey(Bag, on_delete=models.DO_NOTHING)
-    score = models.IntegerField(null=True)
+    score = models.IntegerField(null=False)
     started_at = models.DateTimeField(auto_now_add=True, null=True)
     
     class Meta:
