@@ -13,20 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import path, include
+from django.conf.urls import url, include
 from django.conf import settings
 from django.contrib import admin
 from rest_framework import routers
 from django.conf.urls.static import static
 from rest_framework.authtoken.views import obtain_auth_token
+from BirdieAPI.views import register_user, login_user
 
 router = routers.DefaultRouter(trailing_slash=False)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('admin/', admin.site.urls),
-    path('api-token-auth/', obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include(router.urls)),
+    url('admin/', admin.site.urls),
+    url(r'^register$', register_user),
+    url(r'^login$', login_user),
+    url(r'api-token-auth/', obtain_auth_token),
+    url(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
